@@ -1,103 +1,49 @@
-drop table if exists student;
-
-create table student (
+DROP TABLE IF EXISTS student;
+CREATE TABLE student (
 	id SERIAL,
-	name varchar(128),
-	email varchar(128) unique,
+	name VARCHAR(128),
+	email VARCHAR(128) unique,
+	PRIMARY KEY (id)
+);
+INSERT INTO student (name, email) VALUES ('Musa', 'musa.kanneh@gmail.com');
+INSERT INTO student (name, email) VALUES ('Isaac', 'isaas.montaya@gmail.com');
+INSERT INTO student (name, email) VALUES ('Aubrey', 'aubrey.omondi@gmail.com');
+INSERT INTO student (name, email) VALUES ('Kanenh', 'kanneh.musa@gmail.com');
+SELECT * FROM student;
+
+DROP TABLE IF EXISTS course;
+CREATE TABLE course (
+	id SERIAL,
+	title VARCHAR(128) unique,
 	primary key (id)
 );
+INSERT INTO course (title) VALUES ('Python');
+INSERT INTO course (title) VALUES ('SQL');
+INSERT INTO course (title) VALUES ('PHP');
+SELECT * FROM course;
 
-insert into
-	student (name, email)
-values
-	('Musa', 'musa.kanneh@gmail.com');
-
-insert into
-	student (name, email)
-values
-	('Isaac', 'isaas.montaya@gmail.com');
-
-insert into
-	student (name, email)
-values
-	('Aubrey', 'aubrey.omondi@gmail.com');
-
-insert into
-	student (name, email)
-values
-	('Kanenh', 'kanneh.musa@gmail.com');
-
-select
-	*
-from
-	student;
-
-drop table if exists course;
-
-create table course (
-	id SERIAL,
-	title varchar(128) unique,
-	primary key (id)
+DROP TABLE IF EXISTS some_member;
+CREATE TABLE some_member (
+	student_id INTEGER references student(id) on delete cascade,
+	course_id INTEGER references course(id) on delete cascade,
+	role INTEGER,
+	PRIMARY KEY (student_id, course_id)
 );
 
-insert into
-	course (title)
-values
-	('Python');
+INSERT INTO some_member (student_id, course_id, role) VALUES (1, 2, 1);
+INSERT INTO some_member (student_id, course_id, role) VALUES (2, 1, 0);
+INSERT INTO some_member (student_id, course_id, role) VALUES (3, 2, 1);
+SELECT * from some_member;
 
-insert into
-	course (title)
-values
-	('SQL');
-
-insert into
-	course (title)
-values
-	('PHP');
-
-select
-	*
-from
-	course;
-
-drop table if exists some_member;
-
-create table some_member (
-	student_id integer references student(id) on delete cascade,
-	course_id integer references course(id) on delete cascade,
-	role integer,
-	primary key (student_id, course_id)
-);
-
-insert into
-	some_member (student_id, course_id, role)
-values
-	(1, 2, 1);
-
-insert into
-	some_member (student_id, course_id, role)
-values
-	(2, 1, 0);
-
-insert into
-	some_member (student_id, course_id, role)
-values
-	(3, 2, 1);
-
-select
-	*
-from
-	some_member;
-
-select
+SELECT
 	student.name,
 	some_member.role,
 	course.title
-from
+FROM
 	student
-	join some_member on some_member.student_id = student_id
-	join course on some_member.course_id = course_id
-order by
+	JOIN some_member ON some_member.student_id = student_id
+	JOIN course ON some_member.course_id = course_id
+ORDER BY
 	course.title,
-	some_member.role desc,
+	some_member.role DESC,
 	student.name;
