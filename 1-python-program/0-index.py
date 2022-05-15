@@ -2,13 +2,14 @@ def name_dataframe(scripts):
     """Gives column names to the dataframe first
     Args:
         scripts(args): gets values and implement sorting"""
-        
-    practices.columns = ['code', 'name', 'addr_1', 'addr_2', 'borough', 'village', 'post_code']
+
+    practices.columns = ['code', 'name', 'addr_1',
+                         'addr_2', 'borough', 'village', 'post_code']
     scripts.sort_values('bnf_name')
     distinctPractice = (practices.sort_values(
         ['post_code']).groupby('code').first().reset_index())
-    joinedDF = pd.merge(scripts, distinctPractice, how='inner', left_on='practice', right_on='code')
-
+    joinedDF = pd.merge(scripts, distinctPractice, how='inner',
+                        left_on='practice', right_on='code')
     groups = joinedDF.groupby(['post_code', 'bnf_name'])
     sms = groups.sum()
 
