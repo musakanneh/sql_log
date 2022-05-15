@@ -1,8 +1,4 @@
-/* Creating DB */
 CREATE DATABASE alu_db;
-
-
-/* Creating Entities */
 
 -- Address Table
 CREATE TABLE alu_db.Addresses (
@@ -100,9 +96,6 @@ CREATE TABLE alu_db.GradeReports (
     StudentID int,
     FOREIGN KEY (StudentID) REFERENCES alu_db.Students(StudentID)
 );
-
-
-/* Inserting entries into Tables */
 
 -- Inserting entries into Address table
 INSERT INTO alu_db.Addresses VALUES (1, 'Rwanda', 'Kigali', 'KG-1', 1);
