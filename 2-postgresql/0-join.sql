@@ -5,6 +5,7 @@ CREATE TABLE student (
 	email VARCHAR(128) unique,
 	PRIMARY KEY (id)
 );
+
 INSERT INTO student (name, email) VALUES ('Musa', 'musa.kanneh@gmail.com');
 INSERT INTO student (name, email) VALUES ('Isaac', 'isaas.montaya@gmail.com');
 INSERT INTO student (name, email) VALUES ('Aubrey', 'aubrey.omondi@gmail.com');
@@ -17,6 +18,7 @@ CREATE TABLE course (
 	title VARCHAR(128) unique,
 	primary key (id)
 );
+
 INSERT INTO course (title) VALUES ('Python');
 INSERT INTO course (title) VALUES ('SQL');
 INSERT INTO course (title) VALUES ('PHP');
