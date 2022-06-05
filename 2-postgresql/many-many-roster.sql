@@ -1,3 +1,4 @@
+-- Building a many-to-many roster
 drop table student cascade ;
 create table student ( id SERIAL, name varchar(128) unique, primary key(id));
 
