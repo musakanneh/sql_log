@@ -1,1 +1,1 @@
-# PostgreSQL Log
+# SQL Log
